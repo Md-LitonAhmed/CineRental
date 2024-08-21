@@ -1,7 +1,16 @@
 import React from "react";
-import {getImgUrl} from '../utilies/cine-utilies'
+import { useContext } from "react";
+import { getImgUrl } from "../utilies/cine-utilies";
+import { movieContext } from "../context";
 
 export default function MovieDetailsModal({ movie, onClose }) {
+  const { cartData, setCartData } = useContext(movieContext);
+
+  function handleAddCart(event, movie) {
+    event.stopPropagation();
+    setCartData([...cartData, movie]);
+  }
+
   return (
     <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[420px] sm:max-w-[600px] lg:max-w-[984px] p-4 max-h-[90vh] overflow-auto">
@@ -17,7 +26,7 @@ export default function MovieDetailsModal({ movie, onClose }) {
                 {movie.title}
               </h2>
               <span className="block text-base text-[#9fa0a4] dark:text-[#575A6E] my-3">
-               {movie.genre}
+                {movie.genre}
               </span>
               <div></div>
             </div>
@@ -28,6 +37,7 @@ export default function MovieDetailsModal({ movie, onClose }) {
               <a
                 className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
                 href="#"
+                onClick={(e)=>handleAddCart(e,movie)}
               >
                 <img src="./assets/tag.svg" alt="" />
                 <span>${movie.price}| Add to Cart</span>

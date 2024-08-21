@@ -3,10 +3,19 @@ import { getImgUrl } from "../utilies/cine-utilies";
 import Rating from "./Rating";
 import Star from "../assets/star.svg";
 import MovieDetailsModal from "./MovieDetailsModal";
+import { useContext } from "react";
+import { movieContext } from "../context";
 
 export default function MovieCard({ movie }) {
+  const { cartData, setCartData } = useContext(movieContext);
+
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+
+  function handleAddCart(event, movie) {
+    event.stopPropagation();
+    setCartData([...cartData, movie]);
+  }
 
   const handleModalClose = () => {
     setSelectedMovie(null);
@@ -39,6 +48,7 @@ export default function MovieCard({ movie }) {
             <a
               className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
               href="#"
+              onClick={(e) => handleAddCart(e, movie)}
             >
               <img src="./assets/tag.svg" alt="" />
               <span>${movie.price} | Add to Cart</span>

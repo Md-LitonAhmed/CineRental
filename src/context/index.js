@@ -1,9 +1,5 @@
-import React from 'react'
+import { createContext } from "react";
 
-export default function index() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const movieContext = createContext();
+
+export { movieContext };
