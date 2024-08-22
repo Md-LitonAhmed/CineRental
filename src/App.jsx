@@ -10,7 +10,7 @@ import { movieContext } from "./context";
 
 function App() {
   const [cartData, setCartData] = useState([]);
-  
+
   return (
     <>
       <movieContext.Provider value={{ cartData, setCartData }}>

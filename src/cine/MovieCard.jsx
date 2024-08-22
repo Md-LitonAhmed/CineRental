@@ -14,7 +14,17 @@ export default function MovieCard({ movie }) {
 
   function handleAddCart(event, movie) {
     event.stopPropagation();
-    setCartData([...cartData, movie]);
+    const found = cartData.find((item) => {
+      return item.id === movie.id;
+    });
+    if (!found) {
+      setCartData([...cartData, movie]);
+    } else {
+      alert(`The movie ${movie.title} has been added to the Cart already`);
+      // console.error(
+      //   `The movie ${movie.title} has been added to the Cart already`
+      // );
+    }
   }
 
   const handleModalClose = () => {

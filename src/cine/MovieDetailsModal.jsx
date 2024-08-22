@@ -8,7 +8,18 @@ export default function MovieDetailsModal({ movie, onClose }) {
 
   function handleAddCart(event, movie) {
     event.stopPropagation();
-    setCartData([...cartData, movie]);
+    const found = cartData.find((item) => {
+      return item.id === movie.id;
+    });
+
+    if (!found) {
+      setCartData([...cartData, movie]);
+    } else {
+      alert(`The movie ${movie.title} has been added to the Cart already`);
+      // console.error(
+      //   `The movie ${movie.title} has been added to the Cart already`
+      // );
+    }
   }
 
   return (
@@ -37,7 +48,7 @@ export default function MovieDetailsModal({ movie, onClose }) {
               <a
                 className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
                 href="#"
-                onClick={(e)=>handleAddCart(e,movie)}
+                onClick={(e) => handleAddCart(e, movie)}
               >
                 <img src="./assets/tag.svg" alt="" />
                 <span>${movie.price}| Add to Cart</span>
