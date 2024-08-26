@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { getImgUrl } from "../utilies/cine-utilies";
 import Rating from "./Rating";
-import Star from "../assets/star.svg";
 import MovieDetailsModal from "./MovieDetailsModal";
 import { useContext } from "react";
 import { movieContext } from "../context";
@@ -39,7 +38,7 @@ export default function MovieCard({ movie }) {
   return (
     <>
       {showModal && (
-        <MovieDetailsModal movie={selectedMovie} onClose={handleModalClose} />
+        <MovieDetailsModal movie={selectedMovie} onClose={handleModalClose} onCartAdd={handleAddCart}/>
       )}
 
       <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">

@@ -1,26 +1,25 @@
 import React from "react";
-import { useContext } from "react";
 import { getImgUrl } from "../utilies/cine-utilies";
-import { movieContext } from "../context";
 
-export default function MovieDetailsModal({ movie, onClose }) {
-  const { cartData, setCartData } = useContext(movieContext);
 
-  function handleAddCart(event, movie) {
-    event.stopPropagation();
-    const found = cartData.find((item) => {
-      return item.id === movie.id;
-    });
+export default function MovieDetailsModal({ movie, onClose, onCartAdd }) {
+  // const { cartData, setCartData } = useContext(movieContext);
 
-    if (!found) {
-      setCartData([...cartData, movie]);
-    } else {
-      alert(`The movie ${movie.title} has been added to the Cart already`);
-      // console.error(
-      //   `The movie ${movie.title} has been added to the Cart already`
-      // );
-    }
-  }
+  // function handleAddCart(event, movie) {
+  //   event.stopPropagation();
+  //   const found = cartData.find((item) => {
+  //     return item.id === movie.id;
+  //   });
+
+  //   if (!found) {
+  //     setCartData([...cartData, movie]);
+  //   } else {
+  //     alert(`The movie ${movie.title} has been added to the Cart already`);
+  //     // console.error(
+  //     //   `The movie ${movie.title} has been added to the Cart already`
+  //     // );
+  //   }
+  // }
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm">
@@ -48,7 +47,7 @@ export default function MovieDetailsModal({ movie, onClose }) {
               <a
                 className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
                 href="#"
-                onClick={(e) => handleAddCart(e, movie)}
+                onClick={(e) => onCartAdd(e, movie)}
               >
                 <img src="./assets/tag.svg" alt="" />
                 <span>${movie.price}| Add to Cart</span>
